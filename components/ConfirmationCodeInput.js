@@ -10,6 +10,7 @@ export default class ConfirmationCodeInput extends Component {
   static propTypes = {
     codeLength: PropTypes.number,
     compareWithCode: PropTypes.string,
+    value: PropTypes.string,
     inputPosition: PropTypes.string,
     size: PropTypes.number,
     space: PropTypes.number,
@@ -245,9 +246,16 @@ export default class ConfirmationCodeInput extends Component {
       width: size,
       height: size
     };
+
+    const initValue = val => {
+
+    const value = this.props.value
+    }
     
     let codeInputs = [];
+    let values = this.props.value.split('')
     for (let i = 0; i < codeLength; i++) {
+
       const id = i;
       codeInputs.push(
         <TextInput
@@ -266,7 +274,7 @@ export default class ConfirmationCodeInput extends Component {
           {...this.props}
           autoFocus={autoFocus && id == 0}
           onFocus={() => this._onFocus(id)}
-          value={this.state.codeArr[id] ? this.state.codeArr[id].toString() : ''}
+          value={this.state.codeArr[id] ? this.state.codeArr[id].toString() :values[i]}
           onChangeText={text => this._onInputCode(text, id)}
           onKeyPress={(e) => this._onKeyPress(e)}
           maxLength={1}
